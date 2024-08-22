@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" /> -->
+  <link rel="stylesheet" href="style/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
+  <!-- bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+    crossorigin="anonymous"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- <link href="https://fonts.googleapis.com/css2?family=Prompt&display=swap" rel="stylesheet"> -->
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@100;400;600&display=swap" rel="stylesheet">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <title>Verse Photobooth</title>
+  <link rel="icon" href="./image/QRS.png">
+  <meta property="og:title" content="Verse Photo Booth">
+  <meta property="og:description" content="Made with heart by Qualityroom">
+  <meta property="og:image" content="./image/QRS.png">
+  <meta property="og:url" content="https://www.photobooth.catangelz.com/">
+
+</head>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
+<style>
+  /* hidden button payment */
+  .omise-checkout-button {
+    display: none;
+  }
+
+  .custom-payment-button {
+    cursor: pointer;
+  }
+
+  /* .modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+
+  .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+  }
+
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  } */
+
+  .flex-container.footer {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    z-index: 5;
+    display: flex;
+    align-items: flex-end;
+    padding: 10px;
+    border-radius: 5px;
+  }
+
+  .footer-policy {
+    padding: 5px 10px;
+    cursor: pointer;
+    border: none;
+    margin: 4px 2px;
+    background-color: transparent;
+    color: whitesmoke;
+    text-decoration: underline;
+    text-align: center;
+  }
+</style>
+
+<body>
+
+  <div class="intro-page">
+    <a class="landing-page" href="#" id="landing" onclick="landing()">
+      <img id="landing-img-javascript-2" src="/image/UI/1.index/start.png" alt="" onclick="triggerPayment()">
+    </a>
+    <img id="landing-img-javascript-1" src="/image/UI/1.index/BG.png" alt="" width="100%" height="100%">
+    <div class="flex-container footer">
+      <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal1" class="footer-policy">Refund
+        policy</button>
+      <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal2" class="footer-policy">Privacy
+        policy</button>
+      <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal3" class="footer-policy">Contact
+        information</button>
+    </div>
+  </div>
+
+  <!-- Modal Refund policy -->
+  <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Refund policy</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          หากผู้ใช้บริการได้กดยืนยันการถ่ายภาพและสั่งปริ้นรูปถ่ายแล้ว
+          ทางบริษัทถือว่าเป็นการตัดสินใจที่ครบถ้วนและถูกต้องจากผู้ใช้บริการแล้ว
+          ดังนั้นทางบริษัทขอสงวนสิทธิ์ในการเปลี่ยนแปลง แก้ไข ยกเลิก และคืนเงินในทุกกรณี
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Privacy policy -->
+  <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Privacy policy</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          นโยบายความเป็นส่วนตัวนี้ จัดทำขึ้นโดย บริษัท เวิร์ส มีเดีย เทคโนโลยี จำกัด
+          <br>
+          <br>
+          บริษัทเคารพสิทธิส่วนบุคคลและให้ความสำคัญต่อการคุ้มครองข้อมูลส่วนบุคคลของลูกค้าของบริษัท
+          บริษัทจึงได้จัดทำนโยบายความเป็นส่วนตัวนี้ขึ้น เพื่อแจ้งแก่ท่านว่า
+          บริษัทมีวิธีปฏิบัติในการเก็บรวบรวมข้อมูลส่วนบุคคลของท่านเพื่อนำไปใช้หรือเปิดเผยอย่างไร โดยมีวัตถุประสงค์ใดบ้าง
+          และมีวิธีการจัดการข้อมูลส่วนบุคคลอย่างไร ตลอดจนสิทธิตามกฎหมายของท่านที่เกี่ยวข้องกับข้อมูลส่วนบุคคลด้วย
+          ทั้งนี้ตามพระราชบัญญัติคุ้มครองข้อมูลส่วนบุคคล
+          <br>
+          <br>
+          เพื่อความสะดวกของท่าน ท่านสามารถอ่านนโยบายความเป็นส่วนตัวนี้เป็นรายหัวข้อ ดังนี้
+          <br>
+          <b>ข้อ 1 วัตถุประสงค์ในการเก็บรวบรวมข้อมูลส่วนบุคคล</b>
+          <br>
+          &nbsp; &nbsp; &nbsp;บริษัท เวิร์ส มีเดีย เทคโนโลยี จำกัด ( ผู้ให้บริการ , เรา)
+          ตระหนักถึงความสำคัญของข้อมูลส่วนบุคคล และข้อมูลอื่นอันเกี่ยวกับผู้ใช้บริการ (ลูกค้า หรือ ท่าน)
+          เพื่อให้ท่านสามารถเชื่อมั่นได้ว่าเรามีความโปร่งใสและความรับผิดชอบในการรวบรวม
+          ใช้หรือเปิดเผยข้อมูลของท่านตามพระราชบัญญัติคุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562 (กฎหมายคุ้มครองข้อมูลส่วนบุคคล )
+          รวมถึงกฎหมายอื่นที่เกี่ยวข้อง นโยบายการคุ้มครองข้อมูลส่วนบุคคล (นโยบาย)
+          นี้จึงได้ถูกจัดทำขึ้นเพื่อชี้แจงแก่ท่านถึงรายละเอียดเกี่ยวกับการเก็บรวบรวม ใช้หรือเปิดเผย (รวมเรียกว่า
+          ประมวลผล)
+          <br>
+          <br><b>ข้อ 2 แหล่งที่มาของข้อมูลส่วนบุคคล</b><br>
+          <b>ㆍ จากท่านโดยตรง </b><br>
+          &nbsp; &nbsp; &nbsp; - ข้อมูลที่ท่านกรอกขณะลงทะเบียนสมัครใช้บริการ โดยกรอกข้อมูลต่างๆ ในแบบฟอร์ม
+          ไม่ว่าในรูปแบบเอกสาร ผ่านเว็บไซต์ สื่อสังคมออนไลน์ หรือช่องทางใดๆ<br>
+          &nbsp; &nbsp; &nbsp; - เมื่อท่านสั่งซื้อสินค้าหรือบริการ<br>
+          &nbsp; &nbsp; &nbsp; - เมื่อท่านกรอกข้อมูลผ่านแบบฟอร์ม<br>
+          &nbsp; &nbsp; &nbsp; - เมื่อท่านติดต่อสื่อสาร สอบถามข้อมูล ให้ความเห็นหรือคำแนะนำแก่สินค้าและบริการของเรา<br>
+          &nbsp; &nbsp; &nbsp; - เมื่อท่านเลือกรับข่าวสารหรือสื่อประชาสัมพันธ์ของเรา<br>
+          <b>ㆍ เก็บรวบรวมข้อมูลส่วนบุคคลโดยอัตโนมัติ</b><br>
+          &nbsp; &nbsp; &nbsp; - เมื่อท่านเข้าชมหรือใช้บริการเว็บไซต์ที่มีการใช้คุ้กกี้ (Cookies)
+          หรือเทคโนโลยีที่มีลักษณะคล้ายคลึงกันเพื่อเก็บรวบรวมข้อมูลทางเทคนิคเกี่ยวกับรายละเอียดการใช้งานของท่าน<br>
+          &nbsp; &nbsp; &nbsp; - ข้อมูลที่ได้รับจากการใช้บริการ และข้อมูลที่เกี่ยวข้องกับการใช้บริการ เช่น
+          ข้อมูลอุปกรณ์ที่เข้าใช้งานบริการ (IP Address & MAC Address)<br>
+          <b>ㆍ บุคคลภายนอก เช่น</b><br>
+          &nbsp; &nbsp; &nbsp; - พันธมิตรทางธุรกิจ<br>
+          &nbsp; &nbsp; &nbsp; - ผู้ให้บริการข้อมูล<br>
+          &nbsp; &nbsp; &nbsp; - โซเชียลมีเดีย แพลตฟอร์ม และผู้ให้บริการโฆษณาต่าง ๆ<br>
+          ทั้งนี้ เพื่อประโยชน์ในการปรับปรุงข้อมูลส่วนบุคคลของผู้ใช้บริการให้เป็นปัจจุบัน
+          และเพื่อปรับปรุงคุณภาพและประสิทธิภาพของผลิตภัณฑ์และการให้บริการของบริษัทให้ดียิ่งขึ้น
+          <br>
+          <br><b>ข้อ 3 ข้อมูลส่วนบุคคลที่บริษัทเก็บรวบรวม</b><br>
+          <b>ㆍ ข้อมูลเกี่ยวกับบุคคล</b> เช่น รูปถ่าย, ชื่อ-นามสกุล, อายุ, วันเดือนปีเกิด, เพศ, เลขประจำตัวประชาชน,
+          หมายเลขโทรศัพท์, อีเมล, ที่อยู่ทางไปรษณีย์ , ไอดีไลน์และข้อมูลอื่น ๆ
+          เกี่ยวกับอุปกรณ์ท่านใช้เพื่อเข้าถึงเว็บไซต์ แอพพลิเคชั่น และช่องทางการสื่อสารอื่น ๆ ของบริษัท<br>
+          <b>ㆍ ข้อมูลเสียง ภาพ หรือข้อมูลอิเล็กทรอนิกส์อื่นที่อาจบ่งชี้ตัวบุคคลได้</b> ซึ่งอาจรวมถึง
+          ข้อมูลเกี่ยวกับตำแหน่งที่ตั้งทางภูมิศาสตร์<br>
+          <b>ㆍ ข้อมูลทางการเงิน</b> ได้แก่ รายละเอียดบัตรเครดิต /เดบิด เช่น ชื่อ-นามสกุล บนบัตร หมายเลขบัตร
+          วันที่หมดอายุ ชื่อธนาคารผู้ให้บริการบัตร, บัญชีธนาคาร, การออกใบกำกับภาษี<br>
+          <b>ㆍ ข้อมูลทางเทคนิค</b> เช่น IP Address , Mac Address , บันทึกข้อมูลการเข้าใช้งานหรือ
+          การติดตามพฤติกรรมการใช้งานเว็บไซต์ จาก Session ID , ชนิดและรุ่นของเว็บบราวเชอร์<br>
+          <br><b>ข้อ 4 ระยะเวลาในการเก็บข้อมูลส่วนบุคคล</b><br>
+          &nbsp; &nbsp;
+          &nbsp;เราจะเก็บรักษาข้อมูลส่วนบุคคลของท่านไว้เพียงเท่าที่กฎหมายกำหนดไว้หรือเท่าที่จำเป็นสำหรับวัตถุประสงค์ของการเก็บข้อมูลดังกล่าว
+          เราจะลบหรือทำลายข้อมูลส่วนบุคคล เมื่อเห็นแล้วว่าการเก็บข้อมูลนั้น
+          ไม่มีความจำเป็นตามจุดประสงค์ที่ได้ระบุไว้<br>
+          <br><b>ข้อ 5 สิทธิของท่านในจัดการกับข้อมูลส่วนบุคคล</b><br>
+          &nbsp; &nbsp; &nbsp;กรณีที่ผู้ใช้ต้องการลบบัญชีผู้ใช้งาน
+          สามารถแจ้งเราเพื่อร้องขอการลบบัญชีผู้ใช้งานได้ตลอดเวลา โดยส่งอีเมลมาที่ <b>office.versemedia@gmail.com</b>
+          เพื่อดำเนินการลบผู้ใช้ หรือ <b>โทร: 098-326-2265</b><br>
+          <br><b>ข้อ 6 ข้อมูลของบริษัทและเจ้าหน้าที่คุ้มครองข้อมูลส่วนบุคคลของบริษัท</b><br>
+          ท่านสามารถติดต่อบริษัทได้ตามที่อยู่ต่อไปนี้<br>
+          เลขที่ 5 ซ.นาคนิวาส 12 ถ.นาคนิวาส แขวงลาดพร้าว เขตลาดพร้าว กรุงเทพมหานคร 10230
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Contact information -->
+  <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Contact information</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          หากท่านมีข้อสงสัยหรือข้อแนะนำเกี่ยวกับวิธีปฏิบัติของบริษัทเกี่ยวกับการจัดการข้อมูลส่วนบุคคล
+          ท่านสามารถแจ้งบริษัทได้ทาง<br>
+          <b>Email: office.versemedia@gmail.com หรือ โทร: 098-326-2265</b><br>
+          <b>สถานที่ติดต่อ: เลขที่ 5 ซ.นาคนิวาส 12 ถนนนาคนิวาส แขวงลาดพร้าว เขตลาดพร้าว กรุงเทพมหานคร 10230</b>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!---------- payment modal ------------>
+  <form name="checkoutForm" method="POST" action="/php/payment/checkout.php">
+    <script type="text/javascript" src="https://cdn.omise.co/omise.js" data-key="pkey_60j1fic5oxqdmm69aln"
+      data-image="https://img5.pic.in.th/file/secure-sv1/VerseIcon_Black.png" data-frame-label="Verse Photobooth"
+      data-button-label="Pay now" data-submit-label="Submit" data-location="no" data-amount="15000" data-currency="thb"
+      data-default-payment-method="promptpay">
+      </script>
+    <!-- the script will render <input type="hidden" name="omiseToken"> for you automatically -->
+  </form>
+
+  <script type="text/javascript">
+    function triggerPayment() {
+      document.querySelector('.omise-checkout-button').click();
+    }
+  </script>
+
+  <script type="text/javascript">
+    const video = document.getElementById('webcam');
+
+    function startWebcam() {
+      navigator.mediaDevices.getUserMedia({ video: true })
+        .then(stream => {
+          video.srcObject = stream;
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    }
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'c' || event.key === 'C') {
+        startWebcam();
+      }
+    });
+  </script>
+
+  <!-- <script src="js/verse_photobooth.js" type="text/javascript"></script> -->
+  <!-- <script src="js/script.js"></script> -->
+</body>
+
+</html>

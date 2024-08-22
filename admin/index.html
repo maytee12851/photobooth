@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Prompt&display=swap" rel="stylesheet"> -->
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@100;400;600&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <title>VersePhotobooth Admin</title>
+    <link rel="icon" href="./img/QRS.png">
+    <meta property="og:title" content="Verse Photo Booth">
+    <meta property="og:description" content="Made with heart by Qualityroom">
+    <meta property="og:image" content="./img/QRS.png">
+    <meta property="og:url" content="https://www.photobooth.catangelz.com/">
+
+</head>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<style>
+    body {
+        font-family: 'Prompt', sans-serif;
+    }
+</style>
+
+<body>
+    <div class="card center">
+        <div class="card-header">
+            <h2 class="text-center">ระบบข้อมูลหลังบ้าน</h2>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title text-center">กรุณากรอกรหัสผ่าน</h5>
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" name="username" id="username">
+            </div>
+            <div class="input-group mb-3">
+                <input type="password" class="form-control" name="password" id="password">
+            </div>
+            <div style="text-align:center;">
+                <!-- <input type="submit" class="btn btn-success" value="เข้าสู่ระบบ" name="submit" id="submit"> -->
+                <button id="btn-goin" class="btn btn-success">เข้าสู่ระบบ</button>
+            </div>
+        </div>
+        <p class="text-center" style="color: #7d5a5a; font-size: 14px;"><b>Made with 💖 by qualityroom</b></p>
+    </div>
+    <script>
+        $('#btn-goin').on('click', function () {
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+            if (username == "" || password == "") {
+                Swal.fire({
+                    title: 'กรอกให้ครบก่อนเนอะ',
+                    timer: '2000',
+                    icon: 'error',
+                    showConfirmButton: false
+                })
+            }
+            else if (username != "" && password != "") {
+                $.ajax({
+                    url: '../php/check_admin.php',
+                    type: 'POST',
+                    data: { username: username, password: password },
+                    success: function (data) {
+                        if (data.includes('Welcome')) {
+                            subtxt = data.substring(9);
+                            Swal.fire({
+                                title: 'Login successful',
+                                html: 'ยินดีต้อนรับคุณ ' + subtxt,
+                                timer: '2000',
+                                icon: 'success',
+                                showConfirmButton: false
+                            })
+                            setTimeout(function () {// wait for 5 secs(2) 
+                                window.location.href = "../admin.php";
+                            }, 2000);
+                        } else {
+                            Swal.fire({
+                                title: 'ต้องมีอะไรผิดพลาดตรงไหน ไม่เข้าใจเลยสักครั้ง',
+                                timer: '2000',
+                                icon: 'error',
+                                showConfirmButton: false
+                            })
+                        }
+                    }
+                })
+            }
+
+        });
+        var input = document.getElementById("password");
+        input.addEventListener("keypress", function (event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                document.getElementById("btn-goin").click();
+            }
+        });
+    </script>
+</body>
+<!-- <script src="https://catangelz.com/js/verse_photobooth.js"></script> -->
+
+</html>

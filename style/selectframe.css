@@ -1,0 +1,101 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: url('/image/UI/BG_All.png') no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: #fff;
+}
+
+.container-fluid {
+    text-align: center;
+    padding: 20px;
+    height: 100vh;
+}
+
+.header {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.header h1 {
+    flex: 1;
+    cursor: pointer;
+    color: whitesmoke;
+    opacity: 0.7;
+}
+
+.menu-item {
+    transition: color 0.3s, text-shadow 0.3s;
+}
+
+.menu-item:hover {
+    color: whitesmoke;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 1);
+}
+
+.menu-item.active {
+    color: whitesmoke;
+    text-shadow: 0 0 10px rgb(255, 255, 255, 1);
+    opacity: 1;
+}
+
+.img {
+    transition: box-shadow 0.3s;
+}
+
+.img.active {
+    box-shadow: 0 0 50px rgb(255, 255, 255);
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    margin-bottom: 20px;
+    justify-items: center;
+}
+
+.grid-container img {
+    width: 100%;
+    height: auto;
+}
+
+.grid-container-flower {
+    display: none;
+    grid-template-columns: repeat(4, 1fr);
+    margin-bottom: 20px;
+    justify-items: center;
+}
+
+.grid-container-flower img {
+    width: 100%;
+    height: auto;
+}
+
+.grid-item {
+    cursor: pointer;
+    max-width: 250px;
+}
+
+.select-button {
+    border: none;
+    border-radius: 5px;
+    background: url('/image/UI/3.selectframe/select.png') no-repeat center center;
+    background-size: contain;
+    cursor: pointer;
+    width: 300px;
+    height: 100px;
+}
+
+.preview-container {
+    padding: 20px;
+    align-self: center;
+}
+
+.preview-container img {
+    max-width: 600px;
+}
